@@ -6,9 +6,29 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<%= yield %>
+<body class="centered">
 
+  <div class="pure-menu pure-menu-horizontal">
+    <a href="/" class="pure-menu-link upper-left-nav styled-a">GameConnect</a>
+    <ul class="pure-menu-list">
+      <% if !signed_in? %>
+      <li ><a href="/users/login" class="pure-menu-link upper-left-nav  styled-a">Login</a></li>
+      <li ><a href="/users/new" class="pure-menu-link upper-left-nav  styled-a">Sign up</a></li>
+      <% end %>
+
+      <% if signed_in? %>
+      <li ><a href="/users/<%= current_user().username %>" class="pure-menu-link upper-left-nav  styled-a">Profile</a></li>
+      <li ><a href="/games" class="pure-menu-link upper-left-nav  styled-a">Games</a></li>
+      <li ><a href="/logout" class="pure-menu-link upper-left-nav styled-a">Sign out</a></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="yield_area">
+    <%= yield %>
+  </div>
+  
 </body>
+
 </html>
